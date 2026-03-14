@@ -40,7 +40,6 @@ def ChatGPT_API_with_finish_reason(model, prompt, api_key=CHATGPT_API_KEY, chat_
             response = client.chat.completions.create(
                 model=model,
                 messages=messages,
-                temperature=0,
             )
             if response.choices[0].finish_reason == "length":
                 return response.choices[0].message.content, "max_output_reached"
@@ -72,7 +71,6 @@ def ChatGPT_API(model, prompt, api_key=CHATGPT_API_KEY, chat_history=None):
             response = client.chat.completions.create(
                 model=model,
                 messages=messages,
-                temperature=0,
             )
    
             return response.choices[0].message.content
@@ -95,7 +93,6 @@ async def ChatGPT_API_async(model, prompt, api_key=CHATGPT_API_KEY):
                 response = await client.chat.completions.create(
                     model=model,
                     messages=messages,
-                    temperature=0,
                 )
                 return response.choices[0].message.content
         except Exception as e:
