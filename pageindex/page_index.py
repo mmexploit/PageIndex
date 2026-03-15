@@ -1065,6 +1065,10 @@ def page_index_main(doc, opt=None):
     if not is_valid_pdf:
         raise ValueError("Unsupported input type. Expected a PDF file path or BytesIO object.")
 
+    # Reset stream position if BytesIO (JsonLogger may have consumed it via get_pdf_name)
+    if hasattr(doc, "seek"):
+        doc.seek(0)
+
     print('Parsing PDF...')
     page_list = get_page_tokens(doc)
 
